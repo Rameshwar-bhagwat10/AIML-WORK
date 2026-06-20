@@ -1,0 +1,609 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ─── Light Theme Palette ─── */
+  --bg-base: #f8f9fc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f3f9;
+  --bg-elevated: #ffffff;
+  --bg-inset: #f0f2f7;
+  --bg-sidebar: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.85);
+
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border-color: #e5e7eb;
+  --border-subtle: #f0f1f4;
+
+  /* Accent - Refined Indigo */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: rgba(79, 70, 229, 0.08);
+  --primary-lighter: rgba(79, 70, 229, 0.04);
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --grad-secondary: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+
+  /* Status */
+  --success: #059669;
+  --success-bg: rgba(5, 150, 105, 0.08);
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.06);
+  --warning: #d97706;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --navbar-height: 64px;
+  --border-radius: 12px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+/* ─── Base Styles ─── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ─── Glass Card ─── */
+.glass {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+/* ─── Gradient Text ─── */
+.gradient-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Animations ─── */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(79, 70, 229, 0.1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(79, 70, 229, 0.15);
+  color: #111827;
+}
+
+/* ─── Focus Ring ─── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ─── Checkbox styling ─── */
+input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+
+/* ─── Custom Button Hover ─── */
+.custom-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.custom-btn:active {
+  transform: translateY(0);
+}
+
+/* ─── Custom Input Focus ─── */
+.custom-input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* ─── Login Page Animations ─── */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, -60px) scale(0.95); }
+  75% { transform: translate(40px, -20px) scale(1.02); }
+}
+
+@keyframes float-orb-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-35px, 30px) scale(0.98); }
+  50% { transform: translate(25px, 50px) scale(1.04); }
+  75% { transform: translate(-15px, 20px) scale(1.01); }
+}
+
+@keyframes float-orb-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -30px) scale(1.06); }
+  66% { transform: translate(-30px, -10px) scale(0.96); }
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes progress-bar {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.animate-card-enter {
+  animation: card-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.animate-toast-enter {
+  animation: toast-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-toast-exit {
+  animation: toast-exit 0.3s ease-in both;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Responsive Auth Layout */
+.auth-viewport-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: #f8fafc;
+  /* Spotlight gradient that follows mouse + highly visible dot grid */
+  background-image: 
+    radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.1), transparent 50%),
+    radial-gradient(circle at 1px 1px, #cbd5e1 2px, transparent 0);
+  background-size: 100% 100%, 24px 24px;
+  padding: 24px;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.auth-card-container {
+  display: flex;
+  width: 100%;
+  max-width: 1020px;
+  height: 640px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05), 0 15px 25px -10px rgba(15, 23, 42, 0.03);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-card-container:hover {
+  transform: translateY(-5px);
+  border-color: #818cf8; /* Elegant Indigo border glow */
+  box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08), 0 20px 30px -10px rgba(99, 102, 241, 0.04);
+}
+
+.auth-left-panel {
+  flex: 1 1 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Subtle image scale effect inside visual panel when container is hovered */
+.auth-left-panel img {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-card-container:hover .auth-left-panel img {
+  transform: scale(1.04);
+}
+
+.auth-right-panel {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .auth-viewport-wrapper {
+    padding: 16px;
+  }
+  .auth-card-container {
+    flex-direction: column;
+    height: auto;
+    max-width: 440px;
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  .auth-left-panel {
+    display: none !important;
+  }
+  .auth-right-panel {
+    flex: 1 1 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* Sidebar Tooltip (Visible in Collapsed View) */
+.sidebar-tooltip {
+  position: relative;
+}
+
+.sidebar-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1e293b;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-tooltip::before {
+  content: '';
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent #1e293b transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.sidebar-tooltip:hover::after,
+.sidebar-tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Pulse animation for Live Connection badge */
+@keyframes pulse-green {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s infinite ease-in-out;
+}
+
+/* Sidebar Text Fade In */
+@keyframes sidebar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-sidebar-fade {
+  animation: sidebar-fade-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Phase 7 Progress Dashboard Styles ─── */
+.badge-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.badge-mastery {
+  background-color: rgba(16, 185, 129, 0.08);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.badge-advanced {
+  background-color: rgba(99, 102, 241, 0.08);
+  color: #4f46e5;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.badge-progressing {
+  background-color: rgba(245, 158, 11, 0.08);
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.badge-staged {
+  background-color: rgba(156, 163, 175, 0.08);
+  color: #6b7280;
+  border-color: rgba(156, 163, 175, 0.2);
+}
+
+/* Metallic rank badges */
+.rank-badge-gilded {
+  background: linear-gradient(135deg, #f59e0b, #eab308);
+  color: #1e293b;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  border: 1px solid #fbbf24;
+}
+
+.rank-badge-silvered {
+  background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+  color: #1e293b;
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2);
+  border: 1px solid #e2e8f0;
+}
+
+.rank-badge-bronzed {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  color: #1e293b;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+  border: 1px solid #fbbf24;
+}
+
+/* Interactive Dashboard elements */
+.metric-card-hover {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.metric-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 10px 30px -15px rgba(79, 70, 229, 0.05);
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+.timeline-week-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--bg-surface);
+}
+
+.timeline-week-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(79, 70, 229, 0.25);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-indicator-line {
+  position: relative;
+}
+
+.timeline-indicator-line::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: -20px;
+  width: 2px;
+  background-color: var(--border-color);
+  z-index: 0;
+}
+
+.timeline-indicator-line:last-child::before {
+  display: none;
+}
+
+/* SVG Line Animations */
+.animate-svg-dash {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-svg 1.5s ease-out forwards;
+}
+
+@keyframes draw-svg {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Toast Notification slide-in and slide-out custom animations */
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(125%) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(125%) scale(0.95);
+    opacity: 0;
+  }
+}
+
+.animate-toast-slide-in {
+  animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-toast-slide-out {
+  animation: toast-slide-out 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+
+
